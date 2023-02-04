@@ -3,7 +3,7 @@ package exam;
 import java.io.*;
 import java.util.*;
 
-public class ex14218 {
+public class exxxx14218 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -27,10 +27,10 @@ public class ex14218 {
 			}
 		}
 
-		int[][] treeArr = null; // 도시번호가 요소이고 수도를 방문하는 최소 방문 도시 수가 행번호인 배열
-		for (int i = 0; i < q; i++) { // 정비할 도로 수 q
-			treeArr = new int[][] { { 1 } }; // 첫행에는 1번도시만 들어간다.
+		Set[] tree = new Set[] { new HashSet<>() }; // 도시를 담는 셋이 요소이고 그 도시가 수도를 방문하는 최소 방문 도시 수가 인덱스인 나무
+		tree[0].add(1); // 0번인덱스에는 1번도시만 담은 셋만 존재
 
+		for (int i = 0; i < q; i++) { // 정비할 도로 수 q
 			inArr = Arrays.copyOf(inArr, inArr.length + 1); // 정비할 도로를 받을 행 하나씩 추가
 			inArr[inArr.length - 1] = new int[2]; // 추가된 행에 도로를 입력할 자리를 만들어준다.
 
@@ -39,41 +39,37 @@ public class ex14218 {
 			inArr[inArr.length - 1][0] = Integer.parseInt(st.nextToken()); // 앞도시
 			inArr[inArr.length - 1][1] = Integer.parseInt(st.nextToken()); // 뒷도시
 
-			// 트리에 도시 넣기
-			for (int j = 0; j < treeArr.length; j++) {
-				for (int k = 0; k < treeArr[j].length; k++) {
-					for (int l = 0; l < m + i + 1; l++) {
-						if (treeArr[j][k] == inArr[l][0]) {
-							if (j == treeArr.length - 1) { // treeArr[j]가 마지막행이라면
-								treeArr = Arrays.copyOf(treeArr, treeArr.length + 1); // 뒷도시를 넣을 행 하나 추가
-								treeArr[treeArr.length - 1] = new int[0]; // 추가된 행에 뒷도시를 넣을 자리를 만들어준다.
-							}
-							treeArr[j + 1] = Arrays.copyOf(treeArr[j + 1], treeArr[j + 1].length + 1); // 뒷도시를 넣을 열 하나
-																										// 추가
-							treeArr[j + 1][treeArr[j + 1].length - 1] = inArr[l][1]; // 추가된 새 열에 뒷도시를 넣어준다.
+			for (int j = 0; j < tree.length; j++) { // 나무에 도시 담기
+				for (int k = 0; k < m + i + 1; k++) {
+					if (tree[j].contains(inArr[k][0])) { // 앞도시를 셋이 포함하고 있다면
+						if (j == tree.length - 1) { // 나무의 인덱스가 마지막이라면
+							tree = Arrays.copyOf(tree, j + 2); // 행 하나 추가
+							tree[j + 1] = new HashSet<>(); // 추가된 행에 뒷도시를 넣을 셋을 만들어준다.
 						}
+						tree[j + 1].add(inArr[k][1]); // 뒤의 셋에 뒷도시를 넣어준다.
 					}
 				}
 			}
 
 			// 출력할 배열에 각 도시별로 수도를 방문하는 데 최소 방문 도시들 넣어주기
-			for (int j = treeArr.length - 1; j >= 0; j--) { // j = 수도를 방문하는 최소 방문 도시 수
-				for (int k = 0; k < treeArr[j].length; k++) { // treeArr[j][k] = 도시 번호
-					outArr[i][treeArr[j][k] - 1] = j;
+			for (int j = 0; j < n; j++) { // 도시 번호 = outArr의 인덱스 + 1 = j + 1
+				for (int k = tree.length - 1; k >= 0; k--) { // tree의 인덱스 = 수도를 방문하는 최소 방문 도시 수 = k
+					if (tree[k].contains(j + 1)) {
+						outArr[i][j] = k;
+					}
 				}
 			}
 		}
+		br.close();
 
 		// 출력
 		StringBuffer stringBuffer = new StringBuffer();
 		for (int i = 0; i < outArr.length; i++) {
 			for (int j = 0; j < outArr[i].length; j++) {
-				stringBuffer.append(outArr[i][j] + " ");
+				stringBuffer.append(outArr[i][j]).append(" ");
 			}
 			stringBuffer.append("\n");
 		}
 		System.out.println(stringBuffer);
-
-		br.close();
 	}
 }
