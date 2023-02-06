@@ -2,7 +2,7 @@ package exam;
 
 import java.util.Scanner;
 
-class Main {
+class ex9934 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int k = sc.nextInt();
