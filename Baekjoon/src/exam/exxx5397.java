@@ -26,7 +26,7 @@ class exxx5397 {
 			do {
 				index = str.indexOf(">");
 				if (index < str.length()) {
-					str.insert(index - 1, str.substring(index + 1, length)).setLength(length - 1);
+//					str.insert(index - 1, str.substring(index + 1, length)).setLength(length - 1);
 				} else {
 					str.deleteCharAt(str.length());
 				}
