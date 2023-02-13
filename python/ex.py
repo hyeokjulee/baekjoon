@@ -1,6 +1,10 @@
-A = [[0 for col in range(3)] for row in range(3)]
-for i in range(3):
-    for j in range(3):
-        A[i][j] = i + j
+score = []
 
-print(A[1].index(3))
+score.append('00010000')
+score.append('00000001')
+
+sum = 0
+
+sum = int(score[0]) + int(score[1])
+
+print(sum)

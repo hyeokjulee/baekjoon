@@ -1,15 +1,27 @@
 import sys
 
-N = int(sys.stdin.readline())
+N = int(sys.stdin.readline()) # 단어의 개수
 
-# - 자릿값 점수 -
+drows = [] # 입력받은 후 거꾸로 된 단어 list
+alp = [] # 입력받은 단어들에 존재하는 알파벳 list
 
-# 1순위 : 
-# 자릿수가 가장 높은 알파벳(여러개라면 공동 1순위), 
-# (N=10일 때만)자릿수가 가장 높은 알파벳에서 하나 떨어지지만 10개 모두 같은 알파벳
+for _ in range(N):
+    drow = sys.stdin.readline().rstrip('\n')[::-1] # 입력 받은 단어 거꾸로
+    drows.append(drow) # drows에 저장
+    for i in range(len(drow)):
+        if not(drow[i] in alp): # 처음 보는 알파벳이라면
+            alp.append(drow[i]) # alp에 저장
 
-# 1순위 점수가 같을 경우, 다음자리수 부터 반복(남은 가장 큰 수 2개는 남겨서 저장해놓고 가야함), 
-# 그런데 만약 계속 같다면 동점(동점은 뭘 넣어줘도 상관없음)
+score = [0 for _ in range(len(alp))] # alp에 들어있는 알파벳 각각의 점수들 0으로 초기화
 
+for i in range(N): # N개의 단어들
+    for j in range(len(drows[i])): # 한 단어의 글자수
+        for k in range(len(alp)): # 저장된 알파벳수
+            if drows[i][j] == alp[k]:
+                score[k] += 10 ** j 
 
-# 수는 스택에 넣어놓기?
+sum = 0
+score.sort(reverse=True) # 점수가 높은 것 부터 내림차순 정렬
+for i in range(len(score)):
+    sum += score[i] * (9 - i)
+print(sum)
