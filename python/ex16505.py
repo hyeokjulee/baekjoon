@@ -4,12 +4,10 @@ def listMtoN(x): # 재귀함수
     if x == 0:
         return ['*']
 
-    listM = listMtoN(x - 1)
+    listM = listMtoN(x - 1).copy()
 
-    listN = []
     for i in range(2 ** x, 0, -1):
-        for j in range(i):
-            listN.append(' ')
+        listN = [[' ' for col in range(i)] for row in range(2 ** x)]
 
     for i in range(2 ** (x - 1), 0, -1):
         for j in range(i):
@@ -19,7 +17,7 @@ def listMtoN(x): # 재귀함수
 
     return listN
 
-N = int(sys.stdin.readline())
+N = int(sys.stdin.readline().rstrip('\n'))
 
 outList = listMtoN(N)
 

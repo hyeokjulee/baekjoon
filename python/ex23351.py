@@ -1,7 +1,6 @@
 import sys
 
 N, K, A, B = map(int, sys.stdin.readline().split())
-
 x = K
 cnt = 0
 while x > 0:
