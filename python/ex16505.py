@@ -1,4 +1,4 @@
-import sys, copy
+import sys
 
 def listMtoN(x): # 재귀함수
     if x == 0:
@@ -8,11 +8,11 @@ def listMtoN(x): # 재귀함수
 
     listN = []
     for i in range(2 ** x, 0, -1):
-        for j in i:
+        for j in range(i):
             listN.append(' ')
 
     for i in range(2 ** (x - 1), 0, -1):
-        for j in i:
+        for j in range(i):
             listN[i][j] = listM[i][j]
             listN[i + 2 ** (x - 1)][j] = listM[i][j]
             listN[i][j + 2 ** (x - 1)] = listM[i][j]
