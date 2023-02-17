@@ -2,26 +2,29 @@ import sys
 
 def listMtoN(x): # 재귀함수
     if x == 0:
-        return ['*']
+        return [['*']]
 
     listM = listMtoN(x - 1).copy()
 
-    for i in range(2 ** x, 0, -1):
-        listN = [[' ' for col in range(i)] for row in range(2 ** x)]
+    listN = [[] for i in range(2 ** x)]
 
-    for i in range(2 ** (x - 1), 0, -1):
-        for j in range(i):
-            listN[i][j] = listM[i][j]
-            listN[i + 2 ** (x - 1)][j] = listM[i][j]
-            listN[i][j + 2 ** (x - 1)] = listM[i][j]
+    for i in range(2 ** x - 1, -1, -1):
+        for j in range(i + 1):
+            listN[2 ** x - 1 - i].append(' ')
+
+    for i in range(2 ** (x - 1) - 1, -1, -1):
+        for j in range(i + 1):
+            listN[2 ** (x - 1) - 1 - i][j] = listM[2 ** (x - 1) - 1 - i][j]
+            listN[2 ** x - 1 - i][j] = listM[2 ** (x - 1) - 1 - i][j]
+            listN[2 ** (x - 1) - 1 - i][j + 2 ** (x - 1)] = listM[2 ** (x - 1) - 1 - i][j]
 
     return listN
 
-N = int(sys.stdin.readline().rstrip('\n'))
+N = int(sys.stdin.readline())
 
 outList = listMtoN(N)
 
-for i in range(2 ** N, 0, -1):
-    for j in i:
-        print(outList[i][j], end='')
+for i in range(2 ** N - 1, -1, -1):
+    for j in range(i + 1):
+        print(outList[2 ** N - i][j], end='')
     print()
