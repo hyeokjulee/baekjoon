@@ -17,34 +17,46 @@ for _ in range(int(sys.stdin.readline())):
             if not(outList[i][0] == num[0] and outList[i][1] == num[1] and outList[i][2] != num[2] or outList[i][0] == num[0] and outList[i][1] != num[1] and outList[i][2] == num[2] or outList[i][0] != num[0] and outList[i][1] == num[1] and outList[i][2] == num[2]):
                 del outList[i]
 
-    if s == '1':
+    if s == '1' and b == '2':
         for i in range(len(outList) - 1, -1, -1):
             if not(outList[i][0] == num[0] and outList[i][1] != num[1] and outList[i][2] != num[2] or outList[i][0] != num[0] and outList[i][1] == num[1] and outList[i][2] != num[2] or outList[i][0] != num[0] and outList[i][1] != num[1] and outList[i][2] == num[2]):
-                del outList[i]
+                if num[0] in outList[i] and num[1] in outList[i] and num[2] not in outList[i] or num[0] in outList[i] and num[1] not in outList[i] and num[2] in outList[i] or num[0] not in outList[i] and num[1] in outList[i] and num[2] in outList[i]:
+                    del outList[i]
 
-    if s == '0':
+    if s == '1' and b == '1':
+        for i in range(len(outList) - 1, -1, -1):
+            if not(outList[i][0] == num[0] and outList[i][1] != num[1] and outList[i][2] != num[2] or outList[i][0] != num[0] and outList[i][1] == num[1] and outList[i][2] != num[2] or outList[i][0] != num[0] and outList[i][1] != num[1] and outList[i][2] == num[2]):
+                if num[0] in outList[i] and num[1] not in outList[i] and num[2] not in outList[i] or num[0] not in outList[i] and num[1] not in outList[i] and num[2] in outList[i] or num[0] not in outList[i] and num[1] in outList[i] and num[2] not in outList[i]:
+                    del outList[i]
+
+    if s == '1' and b == '0':
+        for i in range(len(outList) - 1, -1, -1):
+            if not(outList[i][0] == num[0] and outList[i][1] != num[1] and outList[i][2] != num[2] or outList[i][0] != num[0] and outList[i][1] == num[1] and outList[i][2] != num[2] or outList[i][0] != num[0] and outList[i][1] != num[1] and outList[i][2] == num[2]):
+                if num[0] in outList[i] or num[1] in outList[i] or num[2] in outList[i]:
+                    del outList[i]
+
+    if s == '0' and b == '3':
         for i in range(len(outList) - 1, -1, -1):
             if outList[i][0] == num[0] or outList[i][1] == num[1] or outList[i][2] == num[2]:
-                del outList[i]
+                if not(num[0] in outList[i] and num[1] in outList[i] and num[2] in outList[i]):
+                    del outList[i]
 
-    if b == '3':
+    if s == '0' and b == '2':
         for i in range(len(outList) - 1, -1, -1):
-            if num[0] in outList[i] and num[1] in outList[i] and num[2] in outList[i]:
-                del outList[i]
+            if outList[i][0] == num[0] or outList[i][1] == num[1] or outList[i][2] == num[2]:
+                if num[0] in outList[i] and num[1] in outList[i] and num[2] not in outList[i] or num[0] in outList[i] and num[1] not in outList[i] and num[2] in outList[i] or num[0] not in outList[i] and num[1] in outList[i] and num[2] in outList[i]:
+                    del outList[i]
 
-    if b == '2':
+    if s == '0' and b == '1':
         for i in range(len(outList) - 1, -1, -1):
-            if num[0] in outList[i] and num[1] in outList[i] and num[2] not in outList[i] or num[0] in outList[i] and num[1] not in outList[i] and num[2] in outList[i] or num[0] not in outList[i] and num[1] in outList[i] and num[2] in outList[i]:
-                del outList[i]
+            if outList[i][0] == num[0] or outList[i][1] == num[1] or outList[i][2] == num[2]:
+                if num[0] in outList[i] and num[1] not in outList[i] and num[2] not in outList[i] or num[0] not in outList[i] and num[1] not in outList[i] and num[2] in outList[i] or num[0] not in outList[i] and num[1] in outList[i] and num[2] not in outList[i]:
+                    del outList[i]
 
-    if b == '1':
+    if s == '0' and b == '0':
         for i in range(len(outList) - 1, -1, -1):
-            if num[0] in outList[i] and num[1] not in outList[i] and num[2] not in outList[i] or num[0] not in outList[i] and num[1] not in outList[i] and num[2] in outList[i] or num[0] not in outList[i] and num[1] in outList[i] and num[2] not in outList[i]:
-                del outList[i]
-
-    if b == '0':
-        for i in range(len(outList) - 1, -1, -1):
-            if num[0] in outList[i] or num[1] in outList[i] or num[2] in outList[i]:
-                del outList[i]
+            if outList[i][0] == num[0] or outList[i][1] == num[1] or outList[i][2] == num[2]:
+                if num[0] in outList[i] or num[1] in outList[i] or num[2] in outList[i]:
+                    del outList[i]
 
 print(len(outList))

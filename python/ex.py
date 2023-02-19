@@ -1,10 +1,7 @@
 score = []
 
-score.append('00010000')
-score.append('00000001')
+for i in range(10):
+    score.append(1)
 
-sum = 0
-
-sum = int(score[0]) + int(score[1])
-
-print(sum)
+for i in range(len(score)):
+    print(score.pop())
