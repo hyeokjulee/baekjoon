@@ -33,21 +33,21 @@ for _ in range(int(sys.stdin.readline())):
 
     if b == '3':
         for i in range(len(outList) - 1, -1, -1):
-            if not(outList[i][0] != num[0] and outList[i][1] != num[1] and outList[i][2] != num[2] and num[0] in outList[i] and num[1] in outList[i] and num[2] in outList[i]):
+            if not(num[0] in outList[i] and num[1] in outList[i] and num[2] in outList[i]):
                 del outList[i]
 
     if b == '2':
         for i in range(len(outList) - 1, -1, -1):
-            if not(outList[i][0] != num[0] and outList[i][1] != num[1] and num[0] in outList[i] and num[1] in outList[i]):
-                if not(outList[i][0] != num[0] and outList[i][2] != num[2] and num[0] in outList[i] and num[2] in outList[i]):
-                    if not(outList[i][1] != num[1] and outList[i][2] != num[2] and num[1] in outList[i] and num[2] in outList[i]):
+            if not(num[0] in outList[i] and num[1] in outList[i]):
+                if not(num[0] in outList[i] and num[2] in outList[i]):
+                    if not(num[1] in outList[i] and num[2] in outList[i]):
                         del outList[i]
 
     if b == '1':
         for i in range(len(outList) - 1, -1, -1):
-            if not(outList[i][0] != num[0] and num[0] in outList[i]):
-                if not(outList[i][1] != num[1] and num[1] in outList[i]):
-                    if not(outList[i][2] != num[2] and num[2] not in outList[i]):
+            if not(num[0] in outList[i]):
+                if not(num[1] in outList[i]):
+                    if not(num[2] in outList[i]):
                         del outList[i]
 
     if b == '0':
