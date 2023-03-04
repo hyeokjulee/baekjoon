@@ -4,10 +4,11 @@ N = int(sys.stdin.readline())
 
 nums = list(map(int, sys.stdin.readline().split()))
 
-for i in range(len(nums) - 1, 0, -1):
+for i in range(1, len(nums), 1):
     for j in range(i):
-        if nums[j] > nums[j + 1]:
-            nums[j], nums[j + 1] = nums[j + 1], nums[j]
+        if nums[j] > nums[i]:
+            nums.insert(j, nums.pop(i))
+            break
 
 for num in nums:
     print(num, end=" ")
