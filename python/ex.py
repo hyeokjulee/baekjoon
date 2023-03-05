@@ -1,7 +1,11 @@
-score = []
+import sys
 
-for i in range(10):
-    score.append(1)
+nums = []
 
-for i in range(len(score)):
-    print(score.pop())
+for i in range(123, 988):
+    num = str(i)
+    if num[0] != '0' and num[1] != '0' and num[2] != '0' and num[0] != num[1] and num[1] != num[2] and num[0] != num[2]:
+        nums.append(num)
+
+for num in reversed(nums):
+    print(num)

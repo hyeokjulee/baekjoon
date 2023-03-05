@@ -1,58 +1,41 @@
 import sys
 
-outList = []
-for i in range(123, 988):
-    if str(i)[0] != str(i)[1] and str(i)[0] != str(i)[2] and str(i)[1] != str(i)[2]:
-        outList.append(str(i)) # 1에서 9까지의 서로 다른 숫자 세 개로 구성된 세 자리 수 일단 모두 넣어 놓기
+nums = []
+
+for i in range(123, 988): # 1에서 9까지의 서로 다른 숫자 세 개로 구성된 세 자리 수 일단 모두 넣어 놓기
+    num = str(i)
+    if num[0] != '0' and num[1] != '0' and num[2] != '0' and num[0] != num[1] and num[1] != num[2] and num[0] != num[2]:
+        nums.append(num)
 
 for _ in range(int(sys.stdin.readline())):
-    num, s, b = map(str, sys.stdin.readline().split())
+    no, strike, ball = map(int, sys.stdin.readline().split())
+    no = str(no)
 
-    if s == '3':
-        print(1)
-        sys.exit()
+    for num in reversed(nums):
+        cnt = 0 # 스트라이크 수 체크
+        if no[0] == num[0]:
+            cnt += 1
+        if no[1] == num[1]:
+            cnt += 1
+        if no[2] == num[2]:
+            cnt += 1
+        if strike != cnt:
+            nums.remove(num)
+            continue
+        cnt = 0 # 볼 수 체크
+        if no[0] == num[1]:
+            cnt += 1
+        if no[0] == num[2]:
+            cnt += 1
+        if no[1] == num[0]:
+            cnt += 1
+        if no[1] == num[2]:
+            cnt += 1
+        if no[2] == num[0]:
+            cnt += 1
+        if no[2] == num[1]:
+            cnt += 1
+        if ball != cnt:
+            nums.remove(num)
 
-    if s == '2':
-        for i in range(len(outList) - 1, -1, -1):
-            if not(outList[i][0] == num[0] and outList[i][1] == num[1] and outList[i][2] != num[2]):
-                if not(outList[i][0] == num[0] and outList[i][1] != num[1] and outList[i][2] == num[2]):
-                    if not(outList[i][0] != num[0] and outList[i][1] == num[1] and outList[i][2] == num[2]):
-                        del outList[i]
-
-    if s == '1':
-        for i in range(len(outList) - 1, -1, -1):
-            if not(outList[i][0] == num[0] and outList[i][1] != num[1] and outList[i][2] != num[2]):
-                if not(outList[i][0] != num[0] and outList[i][1] == num[1] and outList[i][2] != num[2]):
-                    if not(outList[i][0] != num[0] and outList[i][1] != num[1] and outList[i][2] == num[2]):
-                        del outList[i]
-
-    if s == '0':
-        for i in range(len(outList) - 1, -1, -1):
-            if outList[i][0] == num[0] or outList[i][1] == num[1] or outList[i][2] == num[2]:
-                del outList[i]
-
-    if b == '3':
-        for i in range(len(outList) - 1, -1, -1):
-            if not(num[0] in outList[i] and num[1] in outList[i] and num[2] in outList[i]):
-                del outList[i]
-
-    if b == '2':
-        for i in range(len(outList) - 1, -1, -1):
-            if not(num[0] in outList[i] and num[1] in outList[i]):
-                if not(num[0] in outList[i] and num[2] in outList[i]):
-                    if not(num[1] in outList[i] and num[2] in outList[i]):
-                        del outList[i]
-
-    if b == '1':
-        for i in range(len(outList) - 1, -1, -1):
-            if not(num[0] in outList[i]):
-                if not(num[1] in outList[i]):
-                    if not(num[2] in outList[i]):
-                        del outList[i]
-
-    if b == '0':
-        for i in range(len(outList) - 1, -1, -1):
-            if num[0] in outList[i] or num[1] in outList[i] or num[2] in outList[i]:
-                del outList[i]
-
-    print(len(outList))
+print(len(nums))
