@@ -1,11 +1,10 @@
 import sys
 
-nums = []
+l = int(sys.stdin.readline()) # 체스판의 한 변의 길이
 
-for i in range(123, 988):
-    num = str(i)
-    if num[0] != '0' and num[1] != '0' and num[2] != '0' and num[0] != num[1] and num[1] != num[2] and num[0] != num[2]:
-        nums.append(num)
+board = [['0' * l] * l]
 
-for num in reversed(nums):
-    print(num)
+for i in range(l):
+    for j in range(l):
+        print(board[i][j], end=' ')
+    print()
