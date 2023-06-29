@@ -23,6 +23,5 @@ int main() {
     }
 
     cout << multi - N << endl;
-    cin >> K;
     return 0;
 }
