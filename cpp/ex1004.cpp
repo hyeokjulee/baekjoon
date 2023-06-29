@@ -19,7 +19,7 @@ int main() {
                 cnt++;
             }
         }
-        cout << cnt;
+        cout << cnt << "\n";
     }
     cin >> n;
 }
