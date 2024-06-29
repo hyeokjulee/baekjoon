@@ -15,7 +15,7 @@ def func(x):
         print_set.add(tuple(temp))
     else:
         for i in range(N):
-            if not is_used[i]:
+            if not is_used[i] and (x == 0 or i >= nums[x - 1]):
                 nums[x] = i
                 is_used[i] = True
                 func(x + 1)
