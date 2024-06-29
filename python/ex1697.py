@@ -1,7 +1,7 @@
 import sys, queue
 
 N, K = map(int, sys.stdin.readline().split())
-lengthOfLine = 2 * max(N, K)
+lengthOfLine = 2 * max(N, K) + 1
 line = [lengthOfLine for _ in range(lengthOfLine)]
 line[N] = 0
 binPositionQueue = queue.Queue()
