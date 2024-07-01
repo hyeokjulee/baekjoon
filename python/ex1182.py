@@ -1,26 +1,19 @@
 import sys
 
 N, S = map(int, sys.stdin.readline().split())
-nums = sorted(list(map(int, sys.stdin.readline().split())))
-sums = []
-sum = 0
+nums = tuple(map(int, sys.stdin.readline().split()))
 cnt = 0
 
-def func(n):
-    global sum
-    if n == N:
-        sums.append(sum)
+def func(idx, sum):
+    if idx < N:
+        func(idx + 1, sum)
+        func(idx + 1, sum + nums[idx])
     else:
-        func(n + 1)
-        sum += nums[n]
-        func(n + 1)
-        sum -= nums[n]
+        if sum == S:
+            global cnt
+            cnt += 1
 
-func(0)
-
-for i in sums:
-    if i == S:
-        cnt += 1
+func(0, 0)
 
 if S != 0:
     print(cnt)
