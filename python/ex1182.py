@@ -1,26 +1,28 @@
-import sys, copy
+import sys
 
 N, S = map(int, sys.stdin.readline().split())
-numbers = sorted(list(map(int, sys.stdin.readline().split())))
-
-subsets_of_numbers = []
-subset = []
+nums = sorted(list(map(int, sys.stdin.readline().split())))
+sums = []
+sum = 0
 cnt = 0
 
 def func(n):
+    global sum
     if n == N:
-        subsets_of_numbers.append(copy.deepcopy(subset))
+        sums.append(sum)
     else:
         func(n + 1)
-        subset.append(numbers[n])
+        sum += nums[n]
         func(n + 1)
-        subset.pop()
+        sum -= nums[n]
 
 func(0)
-subsets_of_numbers.remove([])
 
-for i in subsets_of_numbers:
-    if sum(i) == S:
+for i in sums:
+    if i == S:
         cnt += 1
 
-print(cnt)
+if S != 0:
+    print(cnt)
+else:
+    print(cnt - 1)
