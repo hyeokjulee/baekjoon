@@ -1,21 +1,8 @@
 import sys
+from itertools import combinations_with_replacement
 
 N, M = map(int, sys.stdin.readline().split())
-input_numbers = set(map(int, sys.stdin.readline().split()))
-numbers = sorted(input_numbers)
-L = len(numbers)
-nums = [0] * M
+numbers = sorted(set(map(int, sys.stdin.readline().split())))
 
-def func(m):
-    if m == M:
-        for i in range(M):
-            print(numbers[nums[i]], end=' ')
-        print()
-        return
-    else:
-        for i in range(L):
-            if m == 0 or i >= nums[m - 1]:
-                nums[m] = i
-                func(m + 1)
-
-func(0)
+for i in combinations_with_replacement(numbers, M):
+    print(*i)

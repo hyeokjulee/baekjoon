@@ -1,22 +1,8 @@
 import sys
+from itertools import permutations
 
 N, M = map(int, sys.stdin.readline().split())
-nums = [0] * M
-is_used = [False] * N
-numbers = list(map(int, sys.stdin.readline().split()))
-numbers.sort()
+numbers = sorted(list(map(int, sys.stdin.readline().split())))
 
-def func(x):
-    if x == M:
-        for i in range(M):
-            print(numbers[nums[i]], end=" ")
-        print()
-    else:
-        for i in range(N):
-            if not is_used[i]:
-                nums[x] = i
-                is_used[i] = True
-                func(x + 1)
-                is_used[i] = False
-
-func(0)
+for i in permutations(numbers, M):
+    print(*i)
