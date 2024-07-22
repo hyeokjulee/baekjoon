@@ -22,11 +22,11 @@ for i in range(1, N + 1):
     arr[i] = x
     update(i, x)
     
-for _ in range( M + K):
+for _ in range(M + K):
     a, b, c = map(int, sys.stdin.readline().split())
     
     if a == 1:
-        diff = c - arr[b]
-        update(b, diff)
+        update(b, c - arr[b])
+        arr[b] = c
     else:
         print(sum(c) - sum(b - 1))
