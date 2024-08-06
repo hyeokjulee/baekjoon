@@ -3,7 +3,6 @@ import sys, bisect
 N = int(sys.stdin.readline())
 A = list(map(int, sys.stdin.readline().split()))
 
-result = []
 arr = []
 d = []
 length_of_arr = 0
@@ -17,6 +16,7 @@ for i in range(N):
         arr[idx] = A[i]
         d.append([idx, A[i]])
 
+result = []
 last_idx = max(d)[0]
 for i in range(len(d) - 1, -1, -1):
     if d[i][0] == last_idx:
